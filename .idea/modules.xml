@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GarOOpa.iml" filepath="$PROJECT_DIR$/GarOOpa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/verival-tf.iml" filepath="$PROJECT_DIR$/verival-tf.iml" />
     </modules>
   </component>
 </project>
