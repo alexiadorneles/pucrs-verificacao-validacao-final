@@ -20,7 +20,7 @@ public class Bairro {
         return new Bairro(nome, new Area(pSupEsq, pInfDir), custoTransporte);
     }
 
-    public Bairro(String nome, Area area, double custoTransporte) {
+    private Bairro(String nome, Area area, double custoTransporte) {
         this.nome = nome;
         this.area = area;
         this.custoTransporte = custoTransporte;
