@@ -6,8 +6,11 @@ public class Passageiro {
     private int pontuacaoAcumulada;
     private int qtdadeAvaliacoes;
 
+    static final int PONTUACAO_INICIAL = 8;
+    static final int AVALIACOES_INICIAL = 1;
+
     public static Passageiro novoPassageiro(String cpf, String nome) {
-        return new Passageiro(cpf, nome, 8, 1);
+        return new Passageiro(cpf, nome, PONTUACAO_INICIAL, AVALIACOES_INICIAL);
     }
 
     public static Passageiro passageiroExistente(String cpf, String nome, int pontuacaoAcumulada, int qtdadeAvaliacoes) {
