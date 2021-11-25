@@ -26,7 +26,7 @@ public class Area {
         return new Ponto(x, y);
     }
 
-    public byte codificaPonto(Ponto p) {
+    private byte codificaPonto(Ponto p) {
         byte cod = 0;
         if (p.getY() > getPSupEsq().getY()) { // Ponto acima da area
             cod = (byte) 1;
