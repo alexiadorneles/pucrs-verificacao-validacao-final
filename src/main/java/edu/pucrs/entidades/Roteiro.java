@@ -32,9 +32,9 @@ public class Roteiro {
         determinaBairrosPercorridos(rota, todosBairros);
     }
 
-    public Reta getRota() {
-        return rota;
-    }
+//    public Reta getRota() {
+//        return rota;
+//    }
 
     public Bairro getBairroOrigem() {
         return bairroOrigem;
