@@ -1,16 +1,29 @@
 package edu.pucrs.entidades;
 
 import edu.pucrs.entidades.geometria.Ponto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BairroTest {
+    Ponto pSupEsq;
+    int ladoH;
+    int ladoV;
+    int custoTransporte;
+    Bairro bairro;
+
+    @BeforeEach
+    void setup() {
+        this.pSupEsq = new Ponto(0, 6);
+        this.ladoH = 10;
+        this.ladoV = 8;
+        this.custoTransporte = 20;
+        this.bairro = Bairro.novoBairroQuadrado("Bairro A", pSupEsq, ladoH, custoTransporte);
+    }
 
     @Test
     void deveCriarNovoBairroQuadrado() {
-        Ponto pSupEsq = new Ponto(0, 6);
-        Bairro bairro = Bairro.novoBairroQuadrado("Bairro A", pSupEsq, 10, 20);
         assertEquals("Bairro A", bairro.getNome());
         assertEquals(20, bairro.getCustoTransporte());
         assertEquals(pSupEsq, bairro.getArea().getPSupEsq());
@@ -19,8 +32,7 @@ class BairroTest {
 
     @Test
     void deveCriarNovoBairroRetangular() {
-        Ponto pSupEsq = new Ponto(0, 6);
-        Bairro bairro = Bairro.novoBairroRetangular("Bairro A", pSupEsq, 10, 8, 20);
+        Bairro bairro = Bairro.novoBairroRetangular("Bairro A", pSupEsq, ladoH, ladoV, custoTransporte);
         assertEquals("Bairro A", bairro.getNome());
         assertEquals(20, bairro.getCustoTransporte());
         assertEquals(pSupEsq, bairro.getArea().getPSupEsq());
@@ -29,28 +41,24 @@ class BairroTest {
 
     @Test
     void alteraCustoTransporteDeveAlterarPropriedade() {
-        Bairro bairro = Bairro.novoBairroQuadrado("Bairro A", new Ponto(0, 6), 10, 20);
         bairro.alteraCustoTransporte(100);
         assertEquals(100, bairro.getCustoTransporte());
     }
 
     @Test
     void alteraCustoTransporteDeveDarErro() {
-        Bairro bairro = Bairro.novoBairroQuadrado("Bairro A", new Ponto(0, 6), 10, 20);
         assertThrows(IllegalArgumentException.class, () -> bairro.alteraCustoTransporte(-1));
     }
 
     @Test
     void testToString() {
-        Bairro bairro = Bairro.novoBairroQuadrado("Bairro A", new Ponto(0, 6), 10, 20);
         assertEquals("Bairro [area=Area [pInfDir=Ponto [x=10, y=-4], pSupEsq=Ponto [x=0, y=6]], nome=Bairro A]", bairro.toString());
     }
 
     @Test
     void testEquals() {
-        Bairro bairroUm = Bairro.novoBairroQuadrado("Bairro A", new Ponto(0, 6), 10, 20);
-        Bairro bairroDois = Bairro.novoBairroQuadrado("Bairro A", new Ponto(0, 6), 10, 20);
-        assertEquals(bairroUm, bairroDois);
+        Bairro bairroDois = Bairro.novoBairroQuadrado("Bairro A", pSupEsq, ladoH, custoTransporte);
+        assertEquals(bairro, bairroDois);
     }
 
     @Test
