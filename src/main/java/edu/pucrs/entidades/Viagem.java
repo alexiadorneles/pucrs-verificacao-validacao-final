@@ -39,7 +39,7 @@ public class Viagem {
 
     @Override
     public String toString() {
-        return "Viagem [valor cobrado=" + valorCobrado + ", dataHora=" + dataHora + ", id=" + id +
-                ", passageiro=" + passageiro + ", roteiro=" + roteiro + "]";
+        return "Viagem [valor cobrado=" + this.getValorCobrado() + ", dataHora=" + this.getDataHora() + ", id=" + this.getId() +
+                ", passageiro=" + this.getPassageiro() + ", roteiro=" + this.getRoteiro() + "]";
     }
 }
