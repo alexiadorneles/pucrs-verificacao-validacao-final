@@ -1,49 +1,43 @@
 package edu.pucrs.entidades.geometria;
 
-import edu.pucrs.entidades.geometria.Area;
-import edu.pucrs.entidades.geometria.Ponto;
-import edu.pucrs.entidades.geometria.Reta;
-import edu.pucrs.entidades.geometria.SituacaoReta;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AreaTest {
 
-    @Test
-    void classificaDeveRetornarTodaDentro() {
+    Area area;
+
+    @BeforeEach
+    void setup() {
         Ponto pontoSupEsq = new Ponto(0, 5);
         Ponto pontoInfDir = new Ponto(5, 0);
-        Area area = new Area(pontoSupEsq, pontoInfDir);
-        Reta reta = new Reta(new Ponto(1, 2), new Ponto(2, 1));
-        assertEquals(SituacaoReta.TODA_DENTRO, area.classifica(reta));
+        this.area = new Area(pontoSupEsq, pontoInfDir);
     }
 
-    @Test
-    void classificaDeveRetornarTodaForaAcima() {
-        Ponto pontoSupEsq = new Ponto(0, 5);
-        Ponto pontoInfDir = new Ponto(5, 0);
-        Area area = new Area(pontoSupEsq, pontoInfDir);
-        Reta reta = new Reta(new Ponto(6, 8), new Ponto(8, 10));
-        assertEquals(SituacaoReta.TODA_FORA, area.classifica(reta));
+    @ParameterizedTest
+    @CsvSource({
+            "1,2,2,1,TODA_DENTRO",
+            "6,8,8,10,TODA_FORA",
+            "-6,-8,-8,-10,TODA_FORA",
+            "3,3,10,10,INTERSECTA",
+    })
+    void something(int supEsqX, int supEsqY, int infDirX, int infDirY, String situacao) {
+        Reta reta = new Reta(new Ponto(supEsqX, supEsqY), new Ponto(infDirX, infDirY));
+        SituacaoReta esperado = this.getSituacaoPorString(situacao);
+        assertEquals(esperado, area.classifica(reta));
     }
 
-    @Test
-    void classificaDeveRetornarTodaForaAbaixo() {
-        Ponto pontoSupEsq = new Ponto(0, 5);
-        Ponto pontoInfDir = new Ponto(5, 0);
-        Area area = new Area(pontoSupEsq, pontoInfDir);
-        Reta reta = new Reta(new Ponto(-6, -8), new Ponto(-8, -10));
-        assertEquals(SituacaoReta.TODA_FORA, area.classifica(reta));
-    }
-
-    @Test
-    void classificaDeveRetornarIntersecta() {
-        Ponto pontoSupEsq = new Ponto(0, 5);
-        Ponto pontoInfDir = new Ponto(5, 0);
-        Area area = new Area(pontoSupEsq, pontoInfDir);
-        Reta reta = new Reta(new Ponto(3, 3), new Ponto(10, 10));
-        assertEquals(SituacaoReta.INTERSECTA, area.classifica(reta));
+    private SituacaoReta getSituacaoPorString(String situacao) {
+        return switch (situacao) {
+            case "TODA_DENTRO" -> SituacaoReta.TODA_DENTRO;
+            case "TODA_FORA" -> SituacaoReta.TODA_FORA;
+            case "INTERSECTA" -> SituacaoReta.INTERSECTA;
+            default -> SituacaoReta.TODA_FORA;
+        };
     }
 
     @Test
