@@ -22,13 +22,13 @@ public class Roteiro {
         }
     }
 
-    public Roteiro(Bairro bairroOrigem, Bairro bairroDestino, Collection<Bairro> todosBairros) {
+    public Roteiro(Bairro bairroOrigem, Bairro bairroDestino, Collection<Bairro> todosBairros, Reta rota) {
         this.bairroOrigem = bairroOrigem;
         this.bairroDestino = bairroDestino;
         bairrosPercorridos = new LinkedList<>();
         Ponto pOrig = bairroOrigem.getPontoCentral();
         Ponto pDest = bairroDestino.getPontoCentral();
-        rota = new Reta(pOrig, pDest);
+        this.rota = rota;
         determinaBairrosPercorridos(rota, todosBairros);
     }
 

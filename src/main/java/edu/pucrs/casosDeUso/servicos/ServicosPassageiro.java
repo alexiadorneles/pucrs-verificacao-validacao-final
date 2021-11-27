@@ -8,6 +8,7 @@ import edu.pucrs.entidades.Bairro;
 import edu.pucrs.entidades.Passageiro;
 import edu.pucrs.entidades.Roteiro;
 import edu.pucrs.entidades.Viagem;
+import edu.pucrs.entidades.geometria.Reta;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -44,7 +45,8 @@ public class ServicosPassageiro {
         Collection<Bairro> todosBairros = repBairros.recuperaListaBairros();
         Bairro bOrigem = repBairros.recuperaPorNome(bairroOrigem);
         Bairro bDestino = repBairros.recuperaPorNome(bairroDestino);
-        return new Roteiro(bOrigem, bDestino, todosBairros);
+        Reta rota = new Reta(bOrigem.getPontoCentral(), bDestino.getPontoCentral());
+        return new Roteiro(bOrigem, bDestino, todosBairros, rota);
     }
 
     public Viagem criaViagem(int id, Roteiro roteiro, String cpfPassageiro) {
