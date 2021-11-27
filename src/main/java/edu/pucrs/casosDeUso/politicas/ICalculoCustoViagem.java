@@ -8,9 +8,9 @@ public interface ICalculoCustoViagem {
 
     void definePassageiro(Passageiro passageiro);
 
-    public Roteiro getRoteiro();
+    Roteiro getRoteiro();
 
-    public Passageiro getPassageiro();
+    Passageiro getPassageiro();
 
     double calculoCustoBasico();
 

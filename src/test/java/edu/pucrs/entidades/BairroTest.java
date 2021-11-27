@@ -1,29 +1,32 @@
 package edu.pucrs.entidades;
 
+import edu.pucrs.entidades.geometria.Area;
 import edu.pucrs.entidades.geometria.Ponto;
+import edu.pucrs.entidades.geometria.Reta;
+import edu.pucrs.entidades.geometria.SituacaoReta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class BairroTest {
     Ponto pSupEsq;
-    int ladoH;
-    int ladoV;
     int custoTransporte;
     Bairro bairro;
+    Area area;
 
     @BeforeEach
     void setup() {
         this.pSupEsq = new Ponto(0, 6);
-        this.ladoH = 10;
-        this.ladoV = 8;
         this.custoTransporte = 20;
-        this.bairro = Bairro.novoBairroQuadrado("Bairro A", pSupEsq, ladoH, custoTransporte);
+        this.area = mock(Area.class);
+        this.bairro = new Bairro("Bairro A", this.area, this.custoTransporte);
     }
 
     @Test
     void deveCriarNovoBairroQuadrado() {
+        Bairro bairro = Bairro.novoBairroQuadrado("Bairro A", pSupEsq, 10, custoTransporte);
         assertEquals("Bairro A", bairro.getNome());
         assertEquals(20, bairro.getCustoTransporte());
         assertEquals(pSupEsq, bairro.getArea().getPSupEsq());
@@ -32,7 +35,7 @@ class BairroTest {
 
     @Test
     void deveCriarNovoBairroRetangular() {
-        Bairro bairro = Bairro.novoBairroRetangular("Bairro A", pSupEsq, ladoH, ladoV, custoTransporte);
+        Bairro bairro = Bairro.novoBairroRetangular("Bairro A", pSupEsq, 10, 8, custoTransporte);
         assertEquals("Bairro A", bairro.getNome());
         assertEquals(20, bairro.getCustoTransporte());
         assertEquals(pSupEsq, bairro.getArea().getPSupEsq());
@@ -52,22 +55,33 @@ class BairroTest {
 
     @Test
     void testToString() {
-        assertEquals("Bairro [area=Area [pInfDir=Ponto [x=10, y=-4], pSupEsq=Ponto [x=0, y=6]], nome=Bairro A]", bairro.toString());
+        assertEquals("Bairro [area=" + area.toString() + ", nome=Bairro A]", bairro.toString());
     }
 
     @Test
     void testEquals() {
-        Bairro bairroDois = Bairro.novoBairroQuadrado("Bairro A", pSupEsq, ladoH, custoTransporte);
-        assertEquals(bairro, bairroDois);
+        assertEquals(bairro, new Bairro("Bairro A", this.area, this.custoTransporte));
+    }
+
+    @Test
+    void testEqualsDeveRetornarFalso() {
+        assertNotEquals(bairro, new String());
     }
 
     @Test
     void getPontoCentral() {
-        // TODO: implementar com mock
+        Ponto pontoEsperado = new Ponto(5, 8);
+        when(area.pontoCentral()).thenReturn(pontoEsperado);
+        assertEquals(pontoEsperado, bairro.getPontoCentral());
     }
 
     @Test
     void getClassificacao() {
-        // TODO: implementar com mock
+        Reta reta = new Reta(new Ponto(5, 8), new Ponto(10, 10));
+        SituacaoReta esperado = SituacaoReta.TODA_DENTRO;
+        when(area.classifica(reta)).thenReturn(esperado);
+        SituacaoReta resultado = bairro.getClassificacao(reta);
+        assertEquals(esperado, resultado);
+        verify(area, times(1)).classifica(reta);
     }
 }
