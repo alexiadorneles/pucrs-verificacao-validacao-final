@@ -10,7 +10,6 @@ import java.util.LinkedList;
 public class Roteiro {
     private Bairro bairroOrigem;
     private Bairro bairroDestino;
-    private Reta rota;
     private Collection<Bairro> bairrosPercorridos;
 
     private void determinaBairrosPercorridos(Reta rota, Collection<Bairro> todosBairros) {
@@ -26,9 +25,6 @@ public class Roteiro {
         this.bairroOrigem = bairroOrigem;
         this.bairroDestino = bairroDestino;
         bairrosPercorridos = new LinkedList<>();
-        Ponto pOrig = bairroOrigem.getPontoCentral();
-        Ponto pDest = bairroDestino.getPontoCentral();
-        this.rota = rota;
         determinaBairrosPercorridos(rota, todosBairros);
     }
 

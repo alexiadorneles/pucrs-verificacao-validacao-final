@@ -1,34 +1,53 @@
 package edu.pucrs.entidades;
 
-import edu.pucrs.entidades.geometria.Ponto;
 import edu.pucrs.entidades.geometria.Reta;
+import edu.pucrs.entidades.geometria.SituacaoReta;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class RoteiroTest {
 
     Roteiro roteiro;
+    Reta rota;
 
     @BeforeEach
     void setup() {
         Bairro bairroOrigem = mock(Bairro.class);
         Bairro bairroDestino = mock(Bairro.class);
-        Reta rota = mock(Reta.class);
+        this.rota = mock(Reta.class);
         this.roteiro = new Roteiro(bairroOrigem, bairroDestino, Arrays.asList(bairroOrigem, bairroDestino), rota);
     }
 
     @Test
-    void bairrosPercoridos() {
-        Bairro bairroUm = Bairro.novoBairroQuadrado("1", new Ponto(0, 5), 5, 20);
-        Bairro bairroDois = Bairro.novoBairroQuadrado("2", new Ponto(5, 5), 5, 25);
-        Bairro bairroTres = Bairro.novoBairroQuadrado("3", new Ponto(10, 5), 5, 25);
-        Bairro bairroQuatro = Bairro.novoBairroQuadrado("4", new Ponto(15, 5), 5, 25);
-        assertEquals(Arrays.asList(bairroDois, bairroTres, bairroQuatro), roteiro.bairrosPercoridos());
+    void bairrosPercoridosDeveRetornarBairroUnico() {
+        Bairro bairroUm = mock(Bairro.class);
+        when(bairroUm.getClassificacao(rota)).thenReturn(SituacaoReta.TODA_DENTRO);
+        Bairro bairroDois = mock(Bairro.class);
+        when(bairroDois.getClassificacao(rota)).thenReturn(SituacaoReta.TODA_FORA);
+        Bairro bairroTres = mock(Bairro.class);
+        when(bairroTres.getClassificacao(rota)).thenReturn(SituacaoReta.TODA_FORA);
+        Roteiro roteiro = new Roteiro(bairroUm, bairroUm, Arrays.asList(bairroUm, bairroDois, bairroTres), rota);
+        assertEquals(List.of(bairroUm), roteiro.bairrosPercoridos());
+    }
+
+    @Test
+    void bairrosPercoridosDeveRetornarInterseccoes() {
+        Bairro bairroUm = mock(Bairro.class);
+        when(bairroUm.getClassificacao(rota)).thenReturn(SituacaoReta.TODA_DENTRO);
+        Bairro bairroDois = mock(Bairro.class);
+        when(bairroDois.getClassificacao(rota)).thenReturn(SituacaoReta.INTERSECTA);
+        Bairro bairroTres = mock(Bairro.class);
+        when(bairroTres.getClassificacao(rota)).thenReturn(SituacaoReta.TODA_FORA);
+        Roteiro roteiro = new Roteiro(bairroUm, bairroDois, Arrays.asList(bairroUm, bairroDois, bairroTres), rota);
+        assertEquals(List.of(bairroUm, bairroDois), roteiro.bairrosPercoridos());
     }
 
     @Test
