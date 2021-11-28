@@ -6,11 +6,12 @@ import edu.pucrs.entidades.geometria.SituacaoReta;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Roteiro {
     private Bairro bairroOrigem;
     private Bairro bairroDestino;
-    private Collection<Bairro> bairrosPercorridos;
+    private List<Bairro> bairrosPercorridos;
 
     private void determinaBairrosPercorridos(Reta rota, Collection<Bairro> todosBairros) {
         for (Bairro bairro : todosBairros) {
@@ -40,7 +41,7 @@ public class Roteiro {
         return bairroDestino;
     }
 
-    public Collection<Bairro> bairrosPercoridos() {
+    public List<Bairro> bairrosPercoridos() {
         return bairrosPercorridos;
     }
 
