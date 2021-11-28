@@ -74,7 +74,7 @@ class AreaTest {
         Area areaUm = new Area(pontoSupEsq, pontoInfDir);
         Area areaDois = new Area(new Ponto(0, 3), new Ponto(3, 0));
         assertNotEquals(areaUm, areaDois);
-        assertNotEquals(areaDois, areaUm);
+        assertNotEquals(areaDois, new String());
     }
 
     @Test
