@@ -1,9 +1,7 @@
 package edu.pucrs.casosDeUso.politicas;
 
 import edu.pucrs.BairroFactory;
-import edu.pucrs.PassageiroFactory;
 import edu.pucrs.entidades.Bairro;
-import edu.pucrs.entidades.Passageiro;
 import edu.pucrs.entidades.Roteiro;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static helpers.CalculoCustoViagemEspecificoHelper.descontoPontuacaoHelper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.Mockito.*;
@@ -44,11 +43,7 @@ class CalculoCustoViagemRelampagoTest {
             "10, 100, 200, 10",
     })
     void descontoPontuacao(int mediaPassageiro, int avaliacoesPassageiro, double custoBase, double esperado) {
-        Passageiro passageiro = PassageiroFactory.comAvaliacoesEMedia(avaliacoesPassageiro, mediaPassageiro);
-        this.calculoCustoViagemRelampago.definePassageiro(passageiro);
-        CalculoCustoViagemRelampago spy = spy(this.calculoCustoViagemRelampago);
-        doReturn(custoBase).when(spy).calculoCustoBasico();
-        assertEquals(esperado, spy.descontoPontuacao());
+        descontoPontuacaoHelper(avaliacoesPassageiro, mediaPassageiro, custoBase, esperado, this.calculoCustoViagemRelampago);
     }
 
     @ParameterizedTest
