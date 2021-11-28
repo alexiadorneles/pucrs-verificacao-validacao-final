@@ -1,4 +1,4 @@
-package edu.pucrs;
+package factories;
 
 import edu.pucrs.entidades.Passageiro;
 

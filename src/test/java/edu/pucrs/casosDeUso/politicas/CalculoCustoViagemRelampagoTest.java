@@ -1,6 +1,6 @@
 package edu.pucrs.casosDeUso.politicas;
 
-import edu.pucrs.BairroFactory;
+import factories.BairroFactory;
 import edu.pucrs.entidades.Bairro;
 import edu.pucrs.entidades.Roteiro;
 import org.junit.jupiter.api.BeforeEach;

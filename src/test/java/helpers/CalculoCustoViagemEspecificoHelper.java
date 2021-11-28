@@ -1,6 +1,6 @@
 package helpers;
 
-import edu.pucrs.PassageiroFactory;
+import factories.PassageiroFactory;
 import edu.pucrs.casosDeUso.politicas.CalculoCustoViagemBasico;
 import edu.pucrs.entidades.Passageiro;
 
