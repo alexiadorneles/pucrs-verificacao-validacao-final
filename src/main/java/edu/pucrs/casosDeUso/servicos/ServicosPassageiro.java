@@ -21,10 +21,10 @@ public class ServicosPassageiro {
     private CustoViagem custoViagem;
 
     public ServicosPassageiro(IRepositorioBairros repBairros, IRepositorioPassageiros repPassageiros,
-                              ICalculoCustoViagem ccv) {
+                              CustoViagem custoViagem) {
         this.repBairros = repBairros;
         this.repPassageiros = repPassageiros;
-        this.custoViagem = new CustoViagem(ccv);
+        this.custoViagem = custoViagem;
     }
 
     public List<String> getListaBairros() {
