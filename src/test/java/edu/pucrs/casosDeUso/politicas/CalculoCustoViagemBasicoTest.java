@@ -62,5 +62,7 @@ class CalculoCustoViagemBasicoTest {
         CalculoCustoViagemBasico spy = spy(this.calculoCustoViagemBasico);
         doReturn(100d).when(spy).calculoCustoBasico();
         assertEquals(100d, spy.custoViagem());
+        verify(spy, times(1)).descontoPromocaoSazonal();
+        verify(spy, times(1)).descontoPontuacao();
     }
 }
