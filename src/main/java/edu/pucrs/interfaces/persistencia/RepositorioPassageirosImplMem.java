@@ -1,6 +1,6 @@
 package edu.pucrs.interfaces.persistencia;
 
-import edu.pucrs.casosDeUso.repositorios.IRepositorioPassageiros;
+import edu.pucrs.casosdeuso.repositorios.IRepositorioPassageiros;
 import edu.pucrs.entidades.Passageiro;
 
 import java.util.ArrayList;

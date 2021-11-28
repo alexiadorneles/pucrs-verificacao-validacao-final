@@ -1,5 +1,6 @@
-package edu.pucrs.casosDeUso.politicas;
+package edu.pucrs.casosdeuso.politicas;
 
+import edu.pucrs.entidades.Bairro;
 import edu.pucrs.entidades.Passageiro;
 import edu.pucrs.entidades.Roteiro;
 
@@ -29,7 +30,7 @@ public class CalculoCustoViagemBasico implements ICalculoCustoViagem {
     public double calculoCustoBasico() {
         return roteiro.bairrosPercoridos()
                 .stream()
-                .mapToDouble(b -> b.getCustoTransporte())
+                .mapToDouble(Bairro::getCustoTransporte)
                 .sum();
     }
 

@@ -1,9 +1,8 @@
-package edu.pucrs.casosDeUso.servicos;
+package edu.pucrs.casosdeuso.servicos;
 
-import edu.pucrs.casosDeUso.politicas.CustoViagem;
-import edu.pucrs.casosDeUso.politicas.ICalculoCustoViagem;
-import edu.pucrs.casosDeUso.repositorios.IRepositorioBairros;
-import edu.pucrs.casosDeUso.repositorios.IRepositorioPassageiros;
+import edu.pucrs.casosdeuso.politicas.CustoViagem;
+import edu.pucrs.casosdeuso.repositorios.IRepositorioBairros;
+import edu.pucrs.casosdeuso.repositorios.IRepositorioPassageiros;
 import edu.pucrs.entidades.Bairro;
 import edu.pucrs.entidades.Passageiro;
 import edu.pucrs.entidades.Roteiro;
@@ -30,14 +29,14 @@ public class ServicosPassageiro {
     public List<String> getListaBairros() {
         return repBairros.recuperaListaBairros()
                 .stream()
-                .map(b -> b.getNome())
+                .map(Bairro::getNome)
                 .collect(Collectors.toList());
     }
 
     public List<String> getPassageirosCadastrados() {
         return repPassageiros.listaPassageiros()
                 .stream()
-                .map(p -> p.getNome())
+                .map(Passageiro::getNome)
                 .collect(Collectors.toList());
     }
 

@@ -1,4 +1,4 @@
-package edu.pucrs.casosDeUso.politicas;
+package edu.pucrs.casosdeuso.politicas;
 
 import edu.pucrs.entidades.Bairro;
 import edu.pucrs.entidades.Passageiro;

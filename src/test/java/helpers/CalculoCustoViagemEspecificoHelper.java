@@ -4,7 +4,7 @@ import edu.pucrs.entidades.Bairro;
 import edu.pucrs.entidades.Roteiro;
 import factories.BairroFactory;
 import factories.PassageiroFactory;
-import edu.pucrs.casosDeUso.politicas.CalculoCustoViagemBasico;
+import edu.pucrs.casosdeuso.politicas.CalculoCustoViagemBasico;
 import edu.pucrs.entidades.Passageiro;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package edu.pucrs.entidades;
 
-import edu.pucrs.entidades.geometria.Ponto;
 import edu.pucrs.entidades.geometria.Reta;
 import edu.pucrs.entidades.geometria.SituacaoReta;
 
@@ -28,10 +27,6 @@ public class Roteiro {
         bairrosPercorridos = new LinkedList<>();
         determinaBairrosPercorridos(rota, todosBairros);
     }
-
-//    public Reta getRota() {
-//        return rota;
-//    }
 
     public Bairro getBairroOrigem() {
         return bairroOrigem;

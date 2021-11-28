@@ -1,4 +1,4 @@
-package edu.pucrs.casosDeUso.politicas;
+package edu.pucrs.casosdeuso.politicas;
 
 public class CalculoCustoViagemVerao extends CalculoCustoViagemBasico {
     @Override

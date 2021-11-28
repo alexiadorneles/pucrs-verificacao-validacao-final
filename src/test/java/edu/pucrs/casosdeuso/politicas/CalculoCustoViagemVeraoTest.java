@@ -1,8 +1,5 @@
-package edu.pucrs.casosDeUso.politicas;
+package edu.pucrs.casosdeuso.politicas;
 
-import factories.BairroFactory;
-import edu.pucrs.entidades.Bairro;
-import edu.pucrs.entidades.Roteiro;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,53 +8,48 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static helpers.CalculoCustoViagemEspecificoHelper.descontoPontuacaoHelper;
 import static helpers.CalculoCustoViagemEspecificoHelper.descontoSazonalHelper;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
-class CalculoCustoViagemRelampagoTest {
+class CalculoCustoViagemVeraoTest {
 
-    CalculoCustoViagemRelampago calculoCustoViagemRelampago;
+    CalculoCustoViagemVerao calculoCustoViagemVerao;
 
     @BeforeEach
     void setup() {
-        this.calculoCustoViagemRelampago = new CalculoCustoViagemRelampago();
+        this.calculoCustoViagemVerao = new CalculoCustoViagemVerao();
     }
-
 
     @ParameterizedTest
     @CsvSource({
 //          deve retornar 0
-            "5, 200, 100, 0",
-            "4, 30, 100, 0",
-            "8, 30, 100, 0",
+            "9, 200, 100, 0",
             "8, 29, 100, 0",
-//          deve aplicar 5% de desconto
-            "6, 31, 100, 5",
-            "10, 100, 200, 10",
-            "10, 100, 200, 10",
+//          deve aplicar 9% de desconto
+            "10, 1, 100, 9",
+            "10, 100, 200, 18",
     })
     void descontoPontuacao(int mediaPassageiro, int avaliacoesPassageiro, double custoBase, double esperado) {
-        descontoPontuacaoHelper(avaliacoesPassageiro, mediaPassageiro, custoBase, esperado, this.calculoCustoViagemRelampago);
+        descontoPontuacaoHelper(avaliacoesPassageiro, mediaPassageiro, custoBase, esperado, this.calculoCustoViagemVerao);
     }
 
     @ParameterizedTest
     @MethodSource("sazonalProvider")
     void descontoPromocaoSazonal(int quantidadeBairros, List<Integer> custos, int esperado) {
-        descontoSazonalHelper(quantidadeBairros, custos, esperado, this.calculoCustoViagemRelampago);
+        descontoSazonalHelper(quantidadeBairros, custos, esperado, this.calculoCustoViagemVerao);
     }
 
     private static Stream<Arguments> sazonalProvider() {
         return Stream.of(
-                arguments(3, Arrays.asList(10, 15, 20), 0),
                 arguments(2, Arrays.asList(10, 15), 0),
-                arguments(4, Arrays.asList(10, 15, 35, 20), 4)
+                arguments(1, List.of(15), 0),
+                arguments(3, Arrays.asList(10, 10, 10), 3),
+                arguments(4, Arrays.asList(10, 15, 35, 20), 8)
         );
     }
 

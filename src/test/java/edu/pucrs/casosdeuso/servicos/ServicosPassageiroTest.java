@@ -1,7 +1,7 @@
-package edu.pucrs.casosDeUso.servicos;
+package edu.pucrs.casosdeuso.servicos;
 
-import edu.pucrs.casosDeUso.politicas.CalculoCustoViagemBasico;
-import edu.pucrs.casosDeUso.politicas.CustoViagem;
+import edu.pucrs.casosdeuso.politicas.CalculoCustoViagemBasico;
+import edu.pucrs.casosdeuso.politicas.CustoViagem;
 import edu.pucrs.entidades.Bairro;
 import edu.pucrs.entidades.Roteiro;
 import edu.pucrs.entidades.Viagem;
@@ -10,7 +10,6 @@ import edu.pucrs.interfaces.persistencia.RepositorioPassageirosImplMem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,8 +41,8 @@ class ServicosPassageiroTest {
     @Test
     void criaRoteiro() {
         Roteiro roteiro = this.servico.criaRoteiro("Ipiranga", "Bom Fim");
-        assertEquals(roteiro.getBairroOrigem().getNome(), "Ipiranga");
-        assertEquals(roteiro.getBairroDestino().getNome(), "Bom Fim");
+        assertEquals("Ipiranga", roteiro.getBairroOrigem().getNome());
+        assertEquals("Bom Fim", roteiro.getBairroDestino().getNome());
         List<Bairro> bairros = roteiro.bairrosPercoridos();
         assertEquals(2, bairros.size());
         assertEquals("Ipiranga", bairros.get(0).getNome());

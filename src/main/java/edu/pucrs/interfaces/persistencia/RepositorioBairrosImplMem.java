@@ -1,6 +1,6 @@
 package edu.pucrs.interfaces.persistencia;
 
-import edu.pucrs.casosDeUso.repositorios.IRepositorioBairros;
+import edu.pucrs.casosdeuso.repositorios.IRepositorioBairros;
 import edu.pucrs.entidades.Bairro;
 import edu.pucrs.entidades.geometria.Ponto;
 
@@ -36,6 +36,6 @@ public class RepositorioBairrosImplMem implements IRepositorioBairros {
 
     @Override
     public List<Bairro> recuperaListaBairros() {
-        return new ArrayList<Bairro>(bairros.values());
+        return new ArrayList<>(bairros.values());
     }
 }

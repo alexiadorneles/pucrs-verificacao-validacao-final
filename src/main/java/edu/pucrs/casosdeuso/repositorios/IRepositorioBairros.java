@@ -1,4 +1,4 @@
-package edu.pucrs.casosDeUso.repositorios;
+package edu.pucrs.casosdeuso.repositorios;
 
 import edu.pucrs.entidades.Bairro;
 
