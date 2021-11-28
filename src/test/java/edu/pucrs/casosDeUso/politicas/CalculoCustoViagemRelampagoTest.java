@@ -16,6 +16,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static helpers.CalculoCustoViagemEspecificoHelper.descontoPontuacaoHelper;
+import static helpers.CalculoCustoViagemEspecificoHelper.descontoSazonalHelper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.Mockito.*;
@@ -49,15 +50,7 @@ class CalculoCustoViagemRelampagoTest {
     @ParameterizedTest
     @MethodSource("sazonalProvider")
     void descontoPromocaoSazonal(int quantidadeBairros, List<Integer> custos, int esperado) {
-        List<Bairro> bairros = IntStream.range(0, quantidadeBairros)
-                .mapToObj(i -> BairroFactory.novoBairro(custos.get(i)))
-                .collect(Collectors.toList());
-
-        Roteiro roteiro = mock(Roteiro.class);
-        when(roteiro.bairrosPercoridos()).thenReturn(bairros);
-        this.calculoCustoViagemRelampago.defineRoteiro(roteiro);
-
-        assertEquals(esperado, this.calculoCustoViagemRelampago.descontoPromocaoSazonal());
+        descontoSazonalHelper(quantidadeBairros, custos, esperado, this.calculoCustoViagemRelampago);
     }
 
     private static Stream<Arguments> sazonalProvider() {
